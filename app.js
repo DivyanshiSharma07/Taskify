@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -30,7 +31,7 @@ const defaultItems = [
 
 async function main() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/todolistDB", {
+    await mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -148,7 +149,7 @@ app.get("/:customListName", async function(req, res) {
 });
 
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log("Server started on port 3000");
 });
 }).catch((err) => console.log(err))
