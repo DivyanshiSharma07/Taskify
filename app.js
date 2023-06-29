@@ -152,7 +152,5 @@ app.get("/:customListName", async function(req, res) {
 app.listen(PORT, function () {
   console.log(`Server started on port ${PORT}`);
 });
-module.exports = app;
-
 }).catch((err) => console.log(err))
 
