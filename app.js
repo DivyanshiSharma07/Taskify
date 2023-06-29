@@ -32,7 +32,7 @@ const defaultItems = [
 
 async function main() {
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
+    await mongoose.connect("mongodb+srv://divyanshijha2002:eMsiXyO4m9KfVV5f@todo-vercel.3swcrgn.mongodb.net/?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
