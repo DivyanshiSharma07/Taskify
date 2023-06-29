@@ -153,3 +153,5 @@ app.listen(PORT, function () {
   console.log(`Server started on port ${PORT}`);
 });
 }).catch((err) => console.log(err))
+
+module.exports = app;
