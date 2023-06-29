@@ -6,6 +6,9 @@ const _ = require("lodash");
 
 const app = express();
 const PORT = process.env.PORT || 3000
+app.use(express.json());
+app.use(cors());
+app.use(router);
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -154,3 +157,4 @@ app.listen(PORT, function () {
 });
 }).catch((err) => console.log(err))
 
+export default app;
