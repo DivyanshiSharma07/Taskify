@@ -3,9 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 
-
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,53 +18,57 @@ const Item = mongoose.model("Item", itemsSchema);
 const listSchema = new mongoose.Schema({
   name: String,
   items: [itemsSchema]
-})
+});
 const List = mongoose.model("List", listSchema);
-
 
 const defaultItems = [
   { name: "Welcome to your Diary" },
-  { name: "Click + to create new entry" },
+  { name: "Click + to create a new entry" },
   { name: "Hit this to delete an item" }
 ];
 
-async function main() {
+// Connect to MongoDB
+async function connectToDatabase() {
   try {
     await mongoose.connect("mongodb+srv://divyanshijha2002:eMsiXyO4m9KfVV5f@todo-vercel.3swcrgn.mongodb.net/?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    console.log("Connected to MongoDB");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
   }
 }
 
-main().then(() => {
-  app.get("/", async function (req, res) {
-    try {
-      const foundItems = await Item.find({});
-      if (foundItems.length === 0) {
-        await Item.insertMany(defaultItems);
-        console.log("Default items inserted successfully.");
-        res.redirect("/"); 
-      } else {
-        res.render("list", {
-          listTitle: "Today",
-          newlistItems: foundItems
-        });
-      }
-    } catch (error) {
-      console.error("Error inserting default items:", error);
+connectToDatabase(); // Call the function to establish the MongoDB connection
+
+// Define routes
+
+app.get("/", async function (req, res) {
+  try {
+    const foundItems = await Item.find({});
+    if (foundItems.length === 0) {
+      await Item.insertMany(defaultItems);
+      console.log("Default items inserted successfully.");
+      res.redirect("/");
+    } else {
+      res.render("list", {
+        listTitle: "Today",
+        newlistItems: foundItems
+      });
     }
+  } catch (error) {
+    console.error("Error inserting default items:", error);
+  }
+});
+
+app.post("/", async function (req, res) {
+  const itemName = req.body.newItem;
+  const listName = req.body.list;
+  const item = new Item({
+    name: itemName
   });
 
-  app.post("/", async function(req,res){
-    const itemName = req.body.newItem;
-    const listName = req.body.list;
-    const item  = new Item({
-      name : itemName
-    })
-    
   try {
     if (listName === "Today") {
       // Add the item to the default list
@@ -74,7 +77,7 @@ main().then(() => {
     } else {
       // Find the custom list and add the item to it
       const foundList = await List.findOne({ name: listName });
-      
+
       if (foundList) {
         foundList.items.push(item);
         await foundList.save();
@@ -89,10 +92,8 @@ main().then(() => {
     res.status(500).send("Internal Server Error");
   }
 });
-   
 
-
-app.post("/delete", async function(req, res) {
+app.post("/delete", async function (req, res) {
   try {
     const checkedItemId = req.body.checkbox;
     const listName = req.body.listName;
@@ -117,8 +118,7 @@ app.post("/delete", async function(req, res) {
   }
 });
 
-
-app.get("/:customListName", async function(req, res) {
+app.get("/:customListName", async function (req, res) {
   const customListName = _.capitalize(req.params.customListName);
 
   try {
@@ -148,11 +148,6 @@ app.get("/:customListName", async function(req, res) {
   }
 });
 
-module.exports = app;
-
-
 app.listen(PORT, function () {
   console.log(`Server started on port ${PORT}`);
 });
-}).catch((err) => console.log(err))
-
