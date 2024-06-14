@@ -27,3 +27,10 @@ Although the current version of my MongoDB To-Do List project provides the essen
 - Collaborative Lists: Enabling users to share their to-do lists with others, facilitating collaboration and task management in teams or groups.
 - Notifications and Reminders: Adding reminders or notifications for upcoming tasks or approaching deadlines to help users stay organized and on track.
 - Mobile Responsiveness: Enhancing the project's design and layout to ensure optimal user experience across different devices, including smartphones and tablets.
+
+ScreenShots: 
+![Screenshot 2024-06-15 at 3 33 34 AM](https://github.com/DivyanshiSharma07/Taskify/assets/127393402/e51e7934-3cb1-4e86-98ec-051aa402c3e1)
+![Screenshot 2024-06-15 at 3 33 59 AM](https://github.com/DivyanshiSharma07/Taskify/assets/127393402/cefaf5da-04a1-4262-bab8-48520046ad2a)
+![Screenshot 2024-06-15 at 3 34 19 AM](https://github.com/DivyanshiSharma07/Taskify/assets/127393402/838a2373-26dc-46c2-96b2-ea97dd35b8ac)
+
+
