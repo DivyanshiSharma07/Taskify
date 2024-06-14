@@ -1,7 +1,10 @@
 # Taskify
- Taskify is To-Do List project built using Express, MongoDB, EJS ,Mongoose and Body-parser
  Taskify is To-Do List project built using Express, MongoDB, EJS ,Mongoose and Body-parser.
  It allows users to create and manage their to-do lists in a convenient and organized manner.
+
+https://github.com/DivyanshiSharma07/Taskify/assets/127393402/ffd7d1f3-d2bb-4a8c-89d9-20e2f54e838c
+
+ 
 ## Key Features
 - Creating To-Do Lists: Users can create multiple to-do lists based on their preferences or categories. Each list has a unique name and can contain multiple tasks.
 Adding New Items: Users can easily add new tasks to their to-do lists. The application provides an input field where users can enter the task details and submit them to be added to the list.
